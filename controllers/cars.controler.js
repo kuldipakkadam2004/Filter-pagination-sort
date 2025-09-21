@@ -13,7 +13,8 @@ const getAllCars = async (req, res) => {
       ">=": "$gte",
     };
     
-    const regEx = /\b>=|>|<=|<|=\b/g;
+    const regEx = /(>=|<=|>|<|=)/g;
+
     let filters = numericFilters.replace(regEx, (match) => {
       return `-${operatorMap[match]}-`; 
     });
