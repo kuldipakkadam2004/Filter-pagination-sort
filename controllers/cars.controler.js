@@ -12,14 +12,15 @@ const getAllCars = async (req, res) => {
       "<=": "$lte",
       ">=": "$gte",
     };
-    const regEx = /\b>|<|>=|<=|=\b/g;
+    
+    const regEx = /\b>=|>|<=|<|=\b/g;
     let filters = numericFilters.replace(regEx, (match) => {
-      return `-${operatorMap[match]}-`; // $gte
+      return `-${operatorMap[match]}-`; 
     });
 
     const options = ["price", "rating"];
 
-    // numericFilter=price-$gt-30,rating-$gt-5
+
     filters = filters.split(",").forEach((item) => {
       const [field, operator, value] = item.split("-");
 
@@ -27,7 +28,7 @@ const getAllCars = async (req, res) => {
         queryObject[field] = { [operator]: Number(value) };
       }
     });
-  }
+  } 
 
   if (featured) {
     queryObject.featured = featured === "true" ? true : false;
