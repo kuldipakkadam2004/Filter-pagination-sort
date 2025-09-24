@@ -107,6 +107,7 @@ const cars = [
 const populate = async () => {
   try {
     await connectDB(process.env.MONGO_URI);
+    await Car.deleteMany({});
     await Car.create(cars);
     console.log("Cars added...");
     process.exit(0);
